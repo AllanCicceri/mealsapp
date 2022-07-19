@@ -7,10 +7,10 @@ class CategoryComponent extends StatelessWidget {
 
   const CategoryComponent(this.category, {Key? key}) : super(key: key);
 
-  void _SelectCategory(BuildContext context) {
+  void _selectCategory(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (_) {
-        return const CategoryRecipesScreen();
+        return CategoryRecipesScreen(category);
       },
     ));
   }
@@ -18,7 +18,7 @@ class CategoryComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _SelectCategory(context),
+      onTap: () => _selectCategory(context),
       borderRadius: BorderRadius.circular(15),
       splashColor: Theme.of(context).primaryColor,
       child: Container(
