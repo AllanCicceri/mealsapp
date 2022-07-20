@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meal/models/category.dart';
-import 'package:meal/screens/category_recipes_screen.dart';
+import 'package:meal/util/app_routes.dart';
 
 class CategoryComponent extends StatelessWidget {
   final Category category;
@@ -8,11 +8,10 @@ class CategoryComponent extends StatelessWidget {
   const CategoryComponent(this.category, {Key? key}) : super(key: key);
 
   void _selectCategory(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) {
-        return CategoryRecipesScreen(category);
-      },
-    ));
+    Navigator.of(context).pushNamed(
+      AppRoutes.CATEGORY_RECIPES,
+      arguments: category,
+    );
   }
 
   @override
