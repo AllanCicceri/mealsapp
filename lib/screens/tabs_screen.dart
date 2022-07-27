@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:meal/screens/categories_screen.dart';
 import 'package:meal/screens/favorites_screen.dart';
 
+import '../components/main_drawer.dart';
+
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
 
@@ -12,12 +14,12 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedScreenIndex = 0;
 
-  List<Widget> _screens = [
+  final List<Widget> _screens = const [
     CategoriesScreen(),
     FavoritesScreen(),
   ];
 
-  List<String> _titles = ['Categories', 'Favorites'];
+  final List<String> _titles = ['Categories', 'Favorites'];
 
   _selectScreen(int index) {
     setState(() {
@@ -32,6 +34,7 @@ class _TabsScreenState extends State<TabsScreen> {
       child: Scaffold(
         appBar:
             AppBar(title: Center(child: Text(_titles[_selectedScreenIndex]))),
+        drawer: MainDrawer(),
         body: _screens[_selectedScreenIndex],
         bottomNavigationBar: BottomNavigationBar(
           onTap: _selectScreen,
