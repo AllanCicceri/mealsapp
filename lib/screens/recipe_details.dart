@@ -73,6 +73,8 @@ class RecipeDetails extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton:
+          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.star)),
     );
   }
 }
