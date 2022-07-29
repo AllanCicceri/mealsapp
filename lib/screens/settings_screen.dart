@@ -3,7 +3,11 @@ import 'package:meal/components/main_drawer.dart';
 import 'package:meal/models/filters_model.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  final FiltersModel Function(FiltersModel newFilters) _setFilters;
+  final FiltersModel actualFilters;
+
+  const SettingsScreen(this._setFilters, this.actualFilters, {Key? key})
+      : super(key: key);
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -11,6 +15,13 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   FiltersModel filters = FiltersModel();
+
+  @override
+  void initState() {
+    super.initState();
+    filters = widget.actualFilters;
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget _createSwtich(
@@ -19,7 +30,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         value: value,
         title: Text(title),
         subtitle: Text(subtitle),
-        onChanged: onChanged,
+        onChanged: (value) {
+          onChanged(value);
+          widget._setFilters(filters);
+        },
       );
     }
 
