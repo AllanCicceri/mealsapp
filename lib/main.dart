@@ -19,7 +19,10 @@ class _MyAppState extends State<MyApp> {
   FiltersModel filters = FiltersModel();
 
   _setFilters(FiltersModel settingsFilters) {
-    filters = settingsFilters;
+    setState(() {
+      filters = settingsFilters;
+      print('filt: ${filters.isGlutenFree}');
+    });
   }
 
   @override
@@ -41,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         AppRoutes.HOME: (context) => const TabsScreen(),
-        AppRoutes.CATEGORY_RECIPES: (context) => const CategoryRecipesScreen(),
+        AppRoutes.CATEGORY_RECIPES: (context) => CategoryRecipesScreen(filters),
         AppRoutes.RECIPE_DETAILS: (context) => const RecipeDetails(),
         AppRoutes.SETTINGS: (context) =>
             SettingsScreen((filters) => _setFilters(filters), filters),

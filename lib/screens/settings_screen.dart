@@ -20,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void initState() {
     super.initState();
     filters = widget.actualFilters;
+    print('init: ${filters.isGlutenFree}');
   }
 
   @override
