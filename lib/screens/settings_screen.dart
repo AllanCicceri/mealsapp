@@ -23,6 +23,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     print('init: ${filters.isGlutenFree}');
   }
 
+  _handleSwitch(value) {
+    setState(() {
+      widget._setFilters(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget _createSwtich(
@@ -33,7 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         subtitle: Text(subtitle),
         onChanged: (value) {
           onChanged(value);
-          widget._setFilters(filters);
+          _handleSwitch(filters);
         },
       );
     }

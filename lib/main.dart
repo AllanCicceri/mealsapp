@@ -6,6 +6,8 @@ import 'package:meal/screens/settings_screen.dart';
 import 'package:meal/screens/tabs_screen.dart';
 import 'package:meal/util/app_routes.dart';
 
+import 'models/recipe.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -17,12 +19,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   FiltersModel filters = FiltersModel();
+  List<Recipe> favRecipes = [];
 
   _setFilters(FiltersModel settingsFilters) {
     setState(() {
       filters = settingsFilters;
-      print('filt: ${filters.isGlutenFree}');
     });
+  }
+
+  _addRecipeToFavorites(recipe) {
+    favRecipes.add(recipe);
   }
 
   @override
@@ -43,9 +49,10 @@ class _MyAppState extends State<MyApp> {
             ),
       ),
       routes: {
-        AppRoutes.HOME: (context) => const TabsScreen(),
+        AppRoutes.HOME: (context) => TabsScreen(favRecipes),
         AppRoutes.CATEGORY_RECIPES: (context) => CategoryRecipesScreen(filters),
-        AppRoutes.RECIPE_DETAILS: (context) => const RecipeDetails(),
+        AppRoutes.RECIPE_DETAILS: (context) =>
+            RecipeDetails(_addRecipeToFavorites),
         AppRoutes.SETTINGS: (context) =>
             SettingsScreen((filters) => _setFilters(filters), filters),
       },

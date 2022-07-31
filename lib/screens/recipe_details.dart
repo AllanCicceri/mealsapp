@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:meal/models/recipe.dart';
 
 class RecipeDetails extends StatelessWidget {
-  const RecipeDetails({Key? key}) : super(key: key);
+  final void Function(Recipe recipe) _setRecipeToFavorites;
+
+  const RecipeDetails(this._setRecipeToFavorites, {Key? key}) : super(key: key);
 
   _createSectionTitle(BuildContext ctx, String title) {
     return Container(
@@ -12,6 +14,10 @@ class RecipeDetails extends StatelessWidget {
         style: Theme.of(ctx).textTheme.titleMedium,
       ),
     );
+  }
+
+  _handleFavoriteClick(Recipe recipe) {
+    _setRecipeToFavorites(recipe);
   }
 
   Widget _createSectionContainer(Widget child) {
@@ -73,8 +79,9 @@ class RecipeDetails extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.star)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => _handleFavoriteClick(recipe),
+          child: const Icon(Icons.star)),
     );
   }
 }
