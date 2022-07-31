@@ -36,8 +36,7 @@ class _TabsScreenState extends State<TabsScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar:
-            AppBar(title: Center(child: Text(_titles[_selectedScreenIndex]))),
+        appBar: AppBar(title: Text(_titles[_selectedScreenIndex])),
         drawer: MainDrawer(),
         body: _screens[_selectedScreenIndex],
         bottomNavigationBar: BottomNavigationBar(
